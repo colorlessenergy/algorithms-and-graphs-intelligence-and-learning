@@ -1,12 +1,28 @@
 
 // to traverse the binary search tree
-Node.prototype.visit = function () {
+Node.prototype.visit = function (parent) {
   if (this.left != null) {
-    this.left.visit();
+    this.left.visit(this);
   }
-  console.log(this.value);
+  //  text with the current number in the binary search tree
+  ctx.fillStyle = "white";
+  ctx.fillText(this.value, this.x, this.y)
+  ctx.strokeStyle = "white";
+
+  // draws a ellipse where the number is
+  ctx.beginPath();
+  ctx.ellipse(this.x, this.y, 10, 10, 90 * Math.PI / 180, 0, 2 * Math.PI)
+  ctx.stroke();
+  ctx.closePath();
+  
+  // draws a line connecting the root to the other numbers it is connected with
+  ctx.beginPath();
+  ctx.moveTo(parent.x, parent.y);
+  ctx.lineTo(this.x, this.y);
+  ctx.stroke();
+  
   if (this.right != null) {
-    this.right.visit();
+    this.right.visit(this);
   }
 }
 
@@ -34,12 +50,16 @@ Node.prototype.search = function (val) {
   if ( n.value < this.value) {
     if ( this.left === null) {
       this.left = n;
+      this.left.x = this.x - 50;
+      this.left.y = this.y + 20;
     } else {
       this.left.addNode(n);
     }
   } else if (n.value > this.value) {
     if (this.right == null) {
       this.right = n;
+      this.right.x = this.x + 50;
+      this.right.y = this.y + 20;
     } else {
       this.right.addNode(n)
     }
@@ -48,8 +68,10 @@ Node.prototype.search = function (val) {
 
 // constructor function for the node
 
-function Node(val) {
+function Node(val, x, y) {
   this.value = val;
   this.left = null;
   this.right = null;
+  this.x = x;
+  this.y = y;
 }
