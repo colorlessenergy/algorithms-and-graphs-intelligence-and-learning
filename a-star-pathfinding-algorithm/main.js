@@ -215,13 +215,13 @@ function draw () {
     }
   }
 
-  // for (let i = 0; i < closedSet.length; i++) {
-  //   closedSet[i].show("red");
-  // }
+  for (let i = 0; i < closedSet.length; i++) {
+    closedSet[i].show("red");
+  }
 
-  // for (let i = 0; i < openSet.length; i++) {
-  //   openSet[i].show("green");
-  // }
+  for (let i = 0; i < openSet.length; i++) {
+    openSet[i].show("green");
+  }
 
   path = [];
   var temp = current;
@@ -232,20 +232,24 @@ function draw () {
     temp = temp.previous;
   }
 
-  // for (let i = 0; i < path.length; i++) {
-  //   path[i].show('blue')
-  // }
-
-  ctx.beginPath();
-  if (once) {
-    ctx.moveTo(0, 0);
-    once =false;
-  }
   for (let i = 0; i < path.length; i++) {
-    ctx.lineTo(path[i].i * w + w/2, path[i].j * h + h/2);
-    ctx.stroke();
+    path[i].show('blue')
   }
-  ctx.closePath();
+
+
+  // to draw a line for the path
+
+
+  // ctx.beginPath();
+  // if (once) {
+  //   ctx.moveTo(0, 0);
+  //   once =false;
+  // }
+  // for (let i = 0; i < path.length; i++) {
+  //   ctx.lineTo(path[i].i * w + w/2, path[i].j * h + h/2);
+  //   ctx.stroke();
+  // }
+  // ctx.closePath();
 
 
   if (current !== end) {
